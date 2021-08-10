@@ -7,21 +7,25 @@ function init() {
         }, {
             searchControlProvider: 'yandex#search'
         });
+    
+    draw_polygon([
+        [55.779925, 37.842169],
+        [55.578971, 37.695932],
+        [55.709596, 37.389032],
+        [55.905406, 37.528244]
+    ]);
+}
 
-    // Создаем многоугольник без вершин.
-    myPolygon = new ymaps.Polygon([], {}, {
-        // Курсор в режиме добавления новых вершин.
-        editorDrawingCursor: "crosshair",
-        // Максимально допустимое количество вершин.
-        editorMaxPoints: 90,
-        // Цвет заливки.
-        fillColor: '#12ffde3b',
-        // Цвет обводки.
-        strokeColor: '#ff12ff',
-        // Ширина обводки.
-        strokeWidth: 3
-    });
-    // Добавляем многоугольник на карту.
+function draw_polygon(coords=[]){
+    myPolygon = new ymaps.Polygon([ coords ], {}, {
+            editorDrawingCursor: "crosshair",
+            editorMaxPoints: 90,
+            fillColor: '#12ffde3b',
+            strokeColor: '#ff12ff',
+            strokeWidth: 3
+        }
+    );
+        
     myMap.geoObjects.add(myPolygon);
 
     // В режиме добавления новых вершин меняем цвет обводки многоугольника.
@@ -36,8 +40,29 @@ function init() {
 
 
 function show_coords() {
-	coords = myPolygon.geometry.getCoordinates()[0];
+	let coords = myPolygon.geometry.getCoordinates()[0];
+    let arr = []
+    for (i in coords) {
+        arr.push(coords[i][1] + ' ' +  coords[i][0])
+    }
 	const el = document.getElementById('coords');
-	el.innerHTML = coords.join(';<br/>')		
+	el.innerHTML = arr.join(',<br/>')		
+}
+
+
+function coords_to_polygon() {
+    myMap.geoObjects.removeAll();
+    const el = document.getElementById('coords');
+    txt = el.innerText    
+    const arr = txt.split(",\n")
+    let res_arr = []
+    for (i in arr) {
+        let xy_str = arr[i].trim()
+        let xy_arr = xy_str.split(' ')
+        let y = parseFloat(xy_arr[0])
+        let x = parseFloat(xy_arr[1])
+        res_arr.push([x, y])
+    }    
+    draw_polygon(res_arr)
 }
 
