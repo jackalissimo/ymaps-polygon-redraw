@@ -19,7 +19,7 @@ function init() {
 function draw_polygon(coords=[]){
     myPolygon = new ymaps.Polygon([ coords ], {}, {
             editorDrawingCursor: "crosshair",
-            editorMaxPoints: 90,
+            editorMaxPoints: 210,
             fillColor: '#12ffde3b',
             strokeColor: '#ff12ff',
             strokeWidth: 3
@@ -59,8 +59,8 @@ function coords_to_polygon() {
     for (i in arr) {
         let xy_str = arr[i].trim()
         let xy_arr = xy_str.split(' ')
-        let y = parseFloat(xy_arr[0])
-        let x = parseFloat(xy_arr[1])
+        let y = parseFloat(xy_arr[0]).toFixed(6)
+        let x = parseFloat(xy_arr[1]).toFixed(6)
         res_arr.push([x, y])
     }    
     draw_polygon(res_arr)
