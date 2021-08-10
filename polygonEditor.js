@@ -54,7 +54,7 @@ function coords_to_polygon() {
     myMap.geoObjects.removeAll();
     const el = document.getElementById('coords');
     txt = el.innerText    
-    const arr = txt.split(",\n")
+    const arr = txt.split(",")
     let res_arr = []
     for (i in arr) {
         let xy_str = arr[i].trim()

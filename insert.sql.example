@@ -6,3 +6,11 @@ INSERT INTO public.map_areas (id, polygon) VALUES
         37.60690487532285 55.7423976158996
     ))'),
 )
+;
+
+-- ---------------------------
+SELECT 
+    polygon,
+    ST_AsText(polygon) txt,
+FROM map_areas
+;
