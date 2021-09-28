@@ -19,7 +19,7 @@ function init() {
 function draw_polygon(coords=[]){
     myPolygon = new ymaps.Polygon([ coords ], {}, {
             editorDrawingCursor: "crosshair",
-            editorMaxPoints: 210,
+            editorMaxPoints: 500,
             fillColor: '#12ffde3b',
             strokeColor: '#ff12ff',
             strokeWidth: 3
